@@ -88,3 +88,7 @@ class SimpleMFRC522:
       for i in range(0, 5):
           n = n * 256 + uid[i]
       return n
+
+  @staticmethod
+  def cleanup():
+      GPIO.cleanup()
