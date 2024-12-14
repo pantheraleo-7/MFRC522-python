@@ -1,11 +1,9 @@
 # Code by Simon Monk https://github.com/simonmonk/
 
 from . import MFRC522
-import RPi.GPIO as GPIO
 
 class SimpleMFRC522:
 
-    READER = None
 
     KEY = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
     BLOCK_ADDRS = [8, 9, 10]
