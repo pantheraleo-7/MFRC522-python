@@ -136,18 +136,18 @@ class MFRC522:
         self.logger.setLevel(level)
 
         gpioMode = GPIO.getmode()
-        
+
         if gpioMode is None:
             GPIO.setmode(pin_mode)
         else:
             pin_mode = gpioMode
-            
+
         if pin_rst == -1:
             if pin_mode == 11:
                 pin_rst = 15
             else:
                 pin_rst = 22
-            
+
         GPIO.setup(pin_rst, GPIO.OUT)
         GPIO.output(pin_rst, 1)
         self.MFRC522_Init()
@@ -312,7 +312,7 @@ class MFRC522:
         buf = []
         buf.append(self.PICC_SElECTTAG)
         buf.append(0x70)
-        
+
         for i in range(5):
             buf.append(serNum[i])
 
