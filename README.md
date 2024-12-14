@@ -6,25 +6,55 @@ This code was published in relation to a [blog post](https://pimylifeup.com/rasp
 
 ## Installation
 
-Until the package is on PyPi, clone this repository and run `python setup.py install` in the top level directory.
+The package is available on PyPI:
+```shell
+pip install mfrc522
+```
+
+To build from source - clone this repository and run the setup script inside the top level directory:
+```shell
+git clone https://github.com/pimylifeup/MFRC522-python
+cd MFRC522-python
+python setup.py install
+```
 
 ## Example Code
 
-The following code will read a tag from the MFRC522
+To read from a tag:
 
 ```python
-from time import sleep
-import sys
+import time
+
 from mfrc522 import SimpleMFRC522
+
+
 reader = SimpleMFRC522()
 
 try:
     while True:
-        print("Hold a tag near the reader")
         id, text = reader.read()
-        print("ID: %s\nText: %s" % (id,text))
-        sleep(5)
-except KeyboardInterrupt:
-    GPIO.cleanup()
-    raise
+        print(f"{id =}\n{text =}")
+        time.sleep(5)
+finally:
+    reader.cleanup()
+```
+
+To write to a tag:
+
+```python
+import time
+
+from mfrc522 import SimpleMFRC522
+
+
+reader = SimpleMFRC522()
+
+try:
+    while True:
+        data = input("Enter the data to write and then place the tag: ")
+        id, text = reader.write(data)
+        print(f"{id =}\n{text =}")
+        time.sleep(5)
+finally:
+    reader.cleanup()
 ```
